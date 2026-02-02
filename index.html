@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Maria ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #ffe6eb, #fff0f5);
+  min-height: 100vh;
+  text-align: center;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.hidden { display: none; }
+
+/* ---------- PAGE 1 ---------- */
+.intro {
+  font-size: 16px;
+  color: #666;
+  margin-top: 25vh;
+  margin-bottom: 14px;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUp 0.8s ease forwards;
+}
+
+h1 {
+  font-size: clamp(28px, 5vw, 42px);
+  margin-bottom: 18px;
+  line-height: 1.3;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUp 0.8s ease forwards;
+  animation-delay: 0.15s;
+}
+
+.countdown, .timezone {
+  font-size: 15px;
+  color: #888;
+  margin-bottom: 18px;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUp 0.8s ease forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.heart {
+  display: inline-block;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+button {
+  padding: 16px 36px;
+  font-size: 18px;
+  margin: 10px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+#yes { background: #ff4d6d; color: white; }
+#no { background: #ccc; position: absolute; }
+
+/* ---------- PAGE 2 ---------- */
+#page2 {
+  padding-top: 40px;
+  padding-bottom: 120px;
+}
+
+.final-message {
+  font-size: clamp(18px, 4vw, 26px);
+  line-height: 1.7;
+  color: #ff4d6d;
+}
+
+.line {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: lineIn 0.7s ease forwards;
+}
+
+.line:nth-child(1){animation-delay:.3s}
+.line:nth-child(2){animation-delay:1.1s}
+.line:nth-child(3){animation-delay:1.9s}
+.line:nth-child(4){animation-delay:2.7s}
+.line:nth-child(5){animation-delay:3.5s}
+.line:nth-child(6){animation-delay:4.3s}
+
+@keyframes lineIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- PHOTO ---------- */
+.memory {
+  margin: 60px auto;
+  max-width: 90%;
+  border-radius: 20px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 5.5s;
+}
+
+.memory img {
+  width: 100%;
+  display: block;
+}
+
+/* ---------- REPLY BUTTON ---------- */
+.reply {
+  margin-top: 50px;
+}
+
+.reply a {
+  display: inline-block;
+  padding: 14px 30px;
+  background: #ff4d6d;
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 18px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page" id="page1">
+  <div class="intro">Mariamma, I’ve been wanting to ask you something…</div>
+
+  <h1>
+    Will you be my Valentine?
+    <span class="heart">❤️</span>
+  </h1>
+
+  <div class="countdown" id="countdown"></div>
+  <div class="timezone" id="timezone"></div>
+
+  <button id="yes" onclick="startExperience()">Yes 💖</button>
+  <button id="no" onmouseover="moveNo()">No 🙃</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page hidden" id="page2">
+  <h1>Always You ❤️</h1>
+
+  <div class="final-message">
+    <div class="line">Maria,</div><br>
+
+    <div class="line">
+      We met on 20 July 2024 when you came to the UK,
+      and that moment changed everything for me.
+    </div><br>
+
+    <div class="line">
+      On 7 October 2024, I asked you to be my girlfriend —
+      and on 14 February 2025, I flew to the US just to be with you.
+    </div><br>
+
+    <div class="line">
+      This year, even though studies keep us apart,
+      my heart is still right there with you.
+    </div><br>
+
+    <div class="line">
+      Distance has never changed how I feel —
+      it only reminds me how real this is ❤️
+    </div><br>
+
+    <div class="line">
+      I LOVE YOU, BABY ❤️<br>
+      No matter where we are, you’re my Valentine.
+    </div>
+  </div>
+
+  <!-- PHOTO MEMORY -->
+  <div class="memory">
+    <img src="memory.jpg" alt="Us ❤️">
+  </div>
+
+  <!-- TAP TO REPLY -->
+  <div class="reply">
+    <a href="https://wa.me/447453046839?text=Always yes baby I love you ❤️"
+   target="_blank">
+  Tap to send me a ❤️
+  </a>
+  </div>
+</div>
+
+<!-- MUSIC -->
+<audio id="music" loop preload="auto">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3b1a03db6f.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById("music");
+
+function startExperience() {
+  page1.classList.add("hidden");
+  page2.classList.remove("hidden");
+
+  music.volume = 0.15;
+  music.play().catch(()=>{});
+
+  setTimeout(() => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  }, 6500);
+}
+
+function moveNo() {
+  no.style.top = Math.random()*80+"vh";
+  no.style.left = Math.random()*80+"vw";
+}
+
+// Countdown
+function updateCountdown() {
+  const v = new Date(new Date().getFullYear(),1,14);
+  const n = new Date();
+  if(n>v) v.setFullYear(v.getFullYear()+1);
+  const d = Math.floor((v-n)/86400000);
+  const h = Math.floor(((v-n)/3600000)%24);
+  const m = Math.floor(((v-n)/60000)%60);
+  countdown.textContent = `Valentine’s Day in ${d}d ${h}h ${m}m`;
+}
+
+// Time-zone line
+function updateTimezone() {
+  timezone.textContent =
+    "";
+}
+
+updateCountdown();
+updateTimezone();
+setInterval(updateCountdown,60000);
+</script>
+
+</body>
+</html>
